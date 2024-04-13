@@ -1,13 +1,24 @@
 import os
+import configparser
 
-config = open('autoclean.conf', 'r')
-paths = config.readlines()
+conf = configparser.ConfigParser()
+conf.read('autoclean.ini')
+
+paths = conf['DEFAULT']['paths'].split('\n')
 
 for path in paths:
-  folder = r"{}".format(path)
-  print("Looking for: %s", folder)
-  if os.path.exists(folder):
-    content = [f for f in os.listdir(folder)]
-    print(content)
-  else:
-    print("NOT EXISTS")
+    print(path)
+    
+    if os.path.exists(path):
+        content = [item for item in os.listdir(path)]
+        
+        for item in content:
+            removeItem = path + item
+            
+            if os.path.isfile(removeItem):
+                os.remove(removeItem)
+            
+            if os.path.isdir(removeItem):
+                os.rmdir(removeItem)
+    else:
+        print("Path {} doesn't exists", path)

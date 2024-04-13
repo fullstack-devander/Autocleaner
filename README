@@ -1,2 +1,8 @@
-Create autoclean.conf file and put there paths to folders
+Create autoclean.ini file and put there paths to folders
 that need to clean up.
+
+.ini file example:
+
+[DEFAULT]
+paths=C:\Users\andre\Projects\TMP\SOme Folder\
+      C:\Users\andre\Projects\TMP\Another\
